@@ -56,40 +56,49 @@
     </head>
 
     <body>                                                          <!-- Body Section -->
-        <div id='world'>                                            <!-- Creates the maze-->
-            <div class = 'row'>
-                <div class = 'wall'></div>
-                <div class = 'wall'></div>
-                <div class = 'wall'></div>
-                <div class = 'wall'></div>
-                <div class = 'wall'></div>
-            </div>
-            <div class = 'row'>
-                <div class = 'wall'></div>
-                <div class = 'blank'></div>
-                <div class = 'sushi'></div>
-                <div class = 'sushi'></div>
-                <div class = 'wall'></div>
-            </div><div class = 'row'>
-                <div class = 'wall'></div>
-                <div class = 'blank'></div>
-                <div class = 'wall'></div>
-                <div class = 'sushi'></div>
-                <div class = 'wall'></div>
-            </div><div class = 'row'>
-                <div class = 'wall'></div>
-                <div class = 'sushi'></div>
-                <div class = 'sushi'></div>
-                <div class = 'blank'></div>
-                <div class = 'wall'></div>
-            </div><div class = 'row'>
-                <div class = 'wall'></div>
-                <div class = 'wall'></div>
-                <div class = 'wall'></div>
-                <div class = 'wall'></div>
-                <div class = 'wall'></div>
-            </div>
+        <div id='playArea'>                                         <!-- Creates area for the maze-->
         </div>
         <div id='ninjaMan'></div>
     </body>
+
+    <script type="text/javascript">                                 // Javascript Section
+                                                                    // Variables Section
+        var areaGrid = [                                            // World is an array of arrays
+            [1,1,1,1,1,1,1,1,1],
+            [1,0,0,0,1,2,0,0,1],
+            [1,0,1,2,0,0,1,2,1],
+            [1,2,1,1,1,0,1,0,1],
+            [1,0,0,2,1,2,1,0,1],
+            [1,1,1,0,2,0,0,2,1],
+            [1,0,0,0,1,1,1,0,1],
+            [1,2,1,2,0,0,2,0,1],
+            [1,1,1,1,1,1,1,1,1],
+        ];
+
+        var areaGridDict = {
+            0: 'blank',
+            1: 'wall',
+            2: 'sushi'
+        }
+
+        function drawWorld() {                                      // Dynamically creates the maze
+            output = "";
+
+            for (var row=0; row < areaGrid.length; row++) {
+                output += "<div class = 'row'>"
+                for (var column = 0; column < areaGrid[row].length; column++) {
+                    output += "<div class = '" + areaGridDict[areaGrid[row][column]] + "'></div>";
+                }
+                output += "</div>";
+            }
+
+            console.log(output);
+            document.getElementById('playArea').innerHTML = output;
+        }
+
+        console.log("Row length: " + areaGrid.length);
+        console.log("column length: " + areaGrid[0].length);
+        drawWorld();
+    </script>
+
 </html>
