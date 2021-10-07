@@ -6,22 +6,90 @@
 -->
 
 <html>                                                              
-    <head>                                                      <!-- Head Section -->
+    <head>                                                          <!-- Head Section -->
         <title>Nanja-Man</title>
-        <style type="text/css">                                 /* CSS style imbedded coded */
-            div {
-                background-color: yellow;
-                margin: 10px;
-                padding: 10px;
+        <style type="text/css">                                     /* CSS style imbedded coded */
+            * {
+                margin: 0;
+                padding: 0;
+            }
+
+            .row {
+                line-height: 0;
+            }
+            
+            .wall {                                                 /* wall */
+                background-color: blue;
+                height: 40px;
+                width: 40px;
+                display: inline-block;
+            }
+            
+            .blank {                                                /* blank space */
+                background-color: black;
+                height: 40px;
+                width: 40px;
+                display: inline-block;
+            }
+
+            .sushi {                                                /* space with sushi */
+                background-color: black;
+                height: 40px;
+                width: 40px;
+                display: inline-block;
+                background-image: url("img/sushi.png");
+                background-size: contain;
+            }
+
+            #ninjaMan {                                             /* Ninja Man */
+                background-color: black;
+                height: 40px;
+                width: 40px;
+                display:inline-block;
+                background-image: url("img/ninja.gif");
+                background-size: contain;
+                position: absolute;
+                left: 40px;
+                top: 40px;
             }
         </style>
     </head>
 
-    <body>                                                      <!-- Body Section -->
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+    <body>                                                          <!-- Body Section -->
+        <div id='world'>                                            <!-- Creates the maze-->
+            <div class = 'row'>
+                <div class = 'wall'></div>
+                <div class = 'wall'></div>
+                <div class = 'wall'></div>
+                <div class = 'wall'></div>
+                <div class = 'wall'></div>
+            </div>
+            <div class = 'row'>
+                <div class = 'wall'></div>
+                <div class = 'blank'></div>
+                <div class = 'sushi'></div>
+                <div class = 'sushi'></div>
+                <div class = 'wall'></div>
+            </div><div class = 'row'>
+                <div class = 'wall'></div>
+                <div class = 'blank'></div>
+                <div class = 'wall'></div>
+                <div class = 'sushi'></div>
+                <div class = 'wall'></div>
+            </div><div class = 'row'>
+                <div class = 'wall'></div>
+                <div class = 'sushi'></div>
+                <div class = 'sushi'></div>
+                <div class = 'blank'></div>
+                <div class = 'wall'></div>
+            </div><div class = 'row'>
+                <div class = 'wall'></div>
+                <div class = 'wall'></div>
+                <div class = 'wall'></div>
+                <div class = 'wall'></div>
+                <div class = 'wall'></div>
+            </div>
+        </div>
+        <div id='ninjaMan'></div>
     </body>
 </html>
