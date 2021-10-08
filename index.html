@@ -116,14 +116,18 @@
         document.onkeydown = function(event) {
             console.log(event);
 
-            if (event.key == "ArrowLeft" && areaGrid[ninjaMan.y][ninjaMan.x-1] != 1) {                                 // If left key pressed
-                ninjaMan.x = ninjaMan.x - 1;                                  // Move ninja left 1 space
-            } else if (event.key == "ArrowRight") {                         // If right key pressed
-                ninjaMan.x = ninjaMan.x + 1;                                  // Move ninja right 1 space
-            } else if (event.key == "ArrowDown") {                          // If down key pressed
-                ninjaMan.y = ninjaMan.y + 1;                                  // Move ninja down 1 space
-            } else if (event.key == "ArrowUp") {                            // If up key pressed
-                ninjaMan.y = ninjaMan.y - 1;                                  // Move ninja up 1 space
+            if (event.key == "ArrowLeft"                            // If left key pressed
+                && areaGrid[ninjaMan.y][ninjaMan.x-1] != 1) {       //    and no wall on the left
+                ninjaMan.x = ninjaMan.x - 1;                        // Move ninja left 1 space
+            } else if (event.key == "ArrowRight"                    // If right key pressed
+                && areaGrid[ninjaMan.y][ninjaMan.x+1] != 1) {       //     and no wall on the right
+                ninjaMan.x = ninjaMan.x + 1;                        // Move ninja right 1 space
+            } else if (event.key == "ArrowDown"                     // If down key pressed
+                && areaGrid[ninjaMan.y+1][ninjaMan.x] != 1) {       //     and no wall on the bottom                         
+                ninjaMan.y = ninjaMan.y + 1;                        // Move ninja down 1 space
+            } else if (event.key == "ArrowUp"                       // If up key pressed
+                && areaGrid[ninjaMan.y-1][ninjaMan.x] != 1 ) {      //     and no wall up top
+                ninjaMan.y = ninjaMan.y - 1;                        // Move ninja up 1 space
             }
 
             drawNinjaMan();
