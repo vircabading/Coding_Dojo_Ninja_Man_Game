@@ -7,7 +7,7 @@
 
 <html>                                                              
     <head>                                                          <!-- Head Section -->
-        <title>Nanja-Man</title>
+        <title>.: Ninja-Man :.</title>
         <style type="text/css">                                     /* CSS style imbedded coded */
             * {
                 margin: 0;
@@ -15,7 +15,7 @@
             }
 
             .row {
-                line-height: 0;
+                line-height: 0;                                         
             }
             
             .wall {                                                 /* wall */
@@ -49,8 +49,8 @@
                 background-image: url("img/ninja.gif");
                 background-size: contain;
                 position: absolute;
-                left: 40px;
-                top: 40px;
+                /*left: 40px;
+                top: 40px;*/
             }
         </style>
     </head>
@@ -63,7 +63,7 @@
 
     <script type="text/javascript">                                 // Javascript Section
                                                                     // Variables Section
-        var areaGrid = [                                            // World is an array of arrays
+        var areaGrid = [                                            // Grid Area is an array of arrays
             [1,1,1,1,1,1,1,1,1],
             [1,0,0,0,1,2,0,0,1],
             [1,0,1,2,0,0,1,2,1],
@@ -75,12 +75,18 @@
             [1,1,1,1,1,1,1,1,1],
         ];
 
-        var areaGridDict = {
-            0: 'blank',
+        var areaGridDict = {                                        // Dictionary to interpret what is located
+            0: 'blank',                                             //     in a specific grid location
             1: 'wall',
             2: 'sushi'
         }
 
+        var ninjaMan = {                                            // Ninja Man's grid coordinates
+            x: 1,                                                   // Ninja Man starts at the 1,1 grid coordinate
+            y: 1
+        }
+
+                                                                    // Functions Section
         function drawWorld() {                                      // Dynamically creates the maze
             output = "";
 
@@ -96,9 +102,35 @@
             document.getElementById('playArea').innerHTML = output;
         }
 
+        function drawNinjaMan() {
+            document.getElementById('ninjaMan').style.left = (ninjaMan.x * 40) + 'px';  // Horizontal position of Ninja Man
+            document.getElementById('ninjaMan').style.top = (ninjaMan.y * 40) + 'px';   // Vertical position of Ninja Man
+        }
+
+                                                                    // Main Executable section of the Javascript
         console.log("Row length: " + areaGrid.length);
         console.log("column length: " + areaGrid[0].length);
         drawWorld();
+        drawNinjaMan();
+
+        document.onkeydown = function(event) {
+            console.log(event);
+
+            if (event.key == "ArrowLeft" && areaGrid[ninjaMan.y][ninjaMan.x-1] != 1) {                                 // If left key pressed
+                ninjaMan.x = ninjaMan.x - 1;                                  // Move ninja left 1 space
+            } else if (event.key == "ArrowRight") {                         // If right key pressed
+                ninjaMan.x = ninjaMan.x + 1;                                  // Move ninja right 1 space
+            } else if (event.key == "ArrowDown") {                          // If down key pressed
+                ninjaMan.y = ninjaMan.y + 1;                                  // Move ninja down 1 space
+            } else if (event.key == "ArrowUp") {                            // If up key pressed
+                ninjaMan.y = ninjaMan.y - 1;                                  // Move ninja up 1 space
+            }
+
+            drawNinjaMan();
+            console.log("ninja x: " + ninjaMan.x);
+            console.log("ninja y: " + ninjaMan.y);
+        }
+
     </script>
 
 </html>
