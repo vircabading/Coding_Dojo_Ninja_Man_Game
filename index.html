@@ -19,7 +19,7 @@
             }
             
             .wall {                                                 /* wall */
-                background-color: blue;
+                background-color: grey;
                 height: 40px;
                 width: 40px;
                 display: inline-block;
@@ -41,6 +41,15 @@
                 background-size: contain;
             }
 
+            .onigiri {                                                /* space with onigiri */
+                background-color: black;
+                height: 40px;
+                width: 40px;
+                display: inline-block;
+                background-image: url("img/onigiri.png");
+                background-size: contain;
+            }
+
             #ninjaMan {                                             /* Ninja Man */
                 background-color: black;
                 height: 40px;
@@ -51,6 +60,13 @@
                 position: absolute;
                 /*left: 40px;
                 top: 40px;*/
+            }
+
+            .scoreBoard {
+                background-color: yellow;
+                height: 20px;
+                width: 360px;
+                display: inline-block;
             }
         </style>
     </head>
@@ -65,26 +81,29 @@
                                                                     // Variables Section
         var areaGrid = [                                            // Grid Area is an array of arrays
             [1,1,1,1,1,1,1,1,1],
-            [1,0,0,0,1,2,0,0,1],
+            [1,0,3,0,1,2,0,3,1],
             [1,0,1,2,0,0,1,2,1],
             [1,2,1,1,1,0,1,0,1],
-            [1,0,0,2,1,2,1,0,1],
-            [1,1,1,0,2,0,0,2,1],
-            [1,0,0,0,1,1,1,0,1],
-            [1,2,1,2,0,0,2,0,1],
+            [1,0,3,2,1,2,1,0,1],
+            [1,1,1,0,2,0,3,2,1],
+            [1,0,3,0,1,1,1,0,1],
+            [1,2,1,2,3,0,2,3,1],
             [1,1,1,1,1,1,1,1,1],
         ];
 
         var areaGridDict = {                                        // Dictionary to interpret what is located
             0: 'blank',                                             //     in a specific grid location
             1: 'wall',
-            2: 'sushi'
+            2: 'sushi',
+            3: 'onigiri'
         }
 
         var ninjaMan = {                                            // Ninja Man's grid coordinates
             x: 1,                                                   // Ninja Man starts at the 1,1 grid coordinate
             y: 1
         }
+
+        var ninjaScore = 0;                                         // Initialize Ninja Score to Zero
 
                                                                     // Functions Section
         function drawWorld() {                                      // Dynamically creates the maze
@@ -97,6 +116,9 @@
                 }
                 output += "</div>";
             }
+
+            output += "<div class = 'row'><div class = 'scoreBoard'><p></p></div></div>";
+            output += "<div class = 'row'><div class = 'scoreBoard'><p>.: NINJA MAN SCORE: " + ninjaScore + " :.</p></div></div>";
 
             console.log(output);
             document.getElementById('playArea').innerHTML = output;
@@ -130,10 +152,25 @@
                 ninjaMan.y = ninjaMan.y - 1;                        // Move ninja up 1 space
             }
 
+            if (areaGrid[ninjaMan.y][ninjaMan.x] == 2) {            // If Ninja Man finds sushi
+                ninjaScore = ninjaScore + 10;                       //     add 10 to the Ninja Score
+            } else if (areaGrid[ninjaMan.y][ninjaMan.x] == 3) {     // If Ninja Man finds onigiri
+                ninjaScore = ninjaScore + 5;                        //     add 5 to the Ninja Score
+            }
+            areaGrid[ninjaMan.y][ninjaMan.x] = 0;                   // Ninja man eats sushi
+            drawWorld();
+
             drawNinjaMan();
+
             console.log("ninja x: " + ninjaMan.x);
             console.log("ninja y: " + ninjaMan.y);
         }
+        //////////////////////////////////////////////////////////
+            // CHALLENGE
+            // 1. Keep Score of how many sushi's ninjaman eats
+            // 2. Sushi = 10 points  Onigiri = 5 pts
+            // 3. Advanced challenge: create random worlds
+            // 4. Hacker challenge: create ghosts that chase ninjaman
 
     </script>
 
