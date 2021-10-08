@@ -91,11 +91,30 @@
             [1,1,1,1,1,1,1,1,1],
         ];
 
+        console.log("making the grid area");
+        for (var gridRow = 0; gridRow < 9; gridRow++){              // Generate a random grid area
+            for (var gridColumn = 0; gridColumn < 9; gridColumn++) {
+                if (gridRow == 0 || gridRow == 8
+                    || gridColumn == 0 || gridColumn == 8) {
+                    areaGrid[gridRow][gridColumn] = 1;
+                } else {
+                    areaGrid[gridRow][gridColumn] = getRandomInt(7);// Gives a random number from 0 to 6
+                }
+                if (areaGrid[gridRow][gridColumn] == 6) {           // Make more walls
+                    areaGrid[gridRow][gridColumn] = 1;
+                }
+            }
+            areaGrid[1][1] = 0;                                     // Starting point is always blank
+            console.log(areaGrid[gridRow]);
+        }
+
         var areaGridDict = {                                        // Dictionary to interpret what is located
             0: 'blank',                                             //     in a specific grid location
             1: 'wall',
             2: 'sushi',
-            3: 'onigiri'
+            3: 'onigiri',
+            4: 'blank',
+            5: 'blank'
         }
 
         var ninjaMan = {                                            // Ninja Man's grid coordinates
@@ -127,6 +146,10 @@
         function drawNinjaMan() {
             document.getElementById('ninjaMan').style.left = (ninjaMan.x * 40) + 'px';  // Horizontal position of Ninja Man
             document.getElementById('ninjaMan').style.top = (ninjaMan.y * 40) + 'px';   // Vertical position of Ninja Man
+        }
+
+        function getRandomInt(max) {                                                    // Gets a random integer from 0 to max
+            return Math.floor((Math.random() * 100) % max);
         }
 
                                                                     // Main Executable section of the Javascript
@@ -164,12 +187,13 @@
 
             console.log("ninja x: " + ninjaMan.x);
             console.log("ninja y: " + ninjaMan.y);
+            console.log("random num: " + getRandomInt(3));
         }
         //////////////////////////////////////////////////////////
             // CHALLENGE
-            // 1. Keep Score of how many sushi's ninjaman eats
-            // 2. Sushi = 10 points  Onigiri = 5 pts
-            // 3. Advanced challenge: create random worlds
+            // 1. Keep Score of how many sushi's ninjaman eats (done)
+            // 2. Sushi = 10 points  Onigiri = 5 pts (done)
+            // 3. Advanced challenge: create random worlds (done)
             // 4. Hacker challenge: create ghosts that chase ninjaman
 
     </script>
